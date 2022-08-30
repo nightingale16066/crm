@@ -6,7 +6,7 @@ const overlay = document.querySelector('.overlay');
 const tableBody = document.querySelector('.table__body');
 const btnAddGoods = document.querySelector('.panel__add-goods');
 
-const goods = 
+let goods = 
 [
   {
     "id": 1,
@@ -63,14 +63,42 @@ const goods =
       "small": "img/lan_proconnect43-3-25.jpg",
       "big": "img/lan_proconnect43-3-25-b.jpg"
     }
-  }
+  },
+  {
+    "id": 5,
+    "title": "Навигационная система Soundmax",
+    "price": 6000,
+    "description": "Навигационная система Soundmax",
+    "category": "Техника для дома",
+    "discont": false,
+    "count": 5,
+    "units": "шт",
+    "images": {
+      "small": "img/lan_proconnect43-3-25.jpg",
+      "big": "img/lan_proconnect43-3-25-b.jpg"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Телевизор DEXP",
+    "price": 60000,
+    "description": "Телевизор DEXP",
+    "category": "Техника для дома",
+    "discont": false,
+    "count": 15,
+    "units": "шт",
+    "images": {
+      "small": "img/lan_proconnect43-3-25.jpg",
+      "big": "img/lan_proconnect43-3-25-b.jpg"
+    }
+  },
 ]
 
-const createRow = (item) => {
+const createRow = (item, index) => {
   const elem = document.createElement('tr');
   const {id, title, category, units, count, price} = item;
   elem.innerHTML = `
-    <td class="table__cell ">${id+2}</td>
+    <td class="table__cell ">${index + 1}</td>
     <td class="table__cell table__cell_left table__cell_name" data-id="24601654816512">
       <span class="table__cell-id">id: ${id}</span>${title}</td>
     <td class="table__cell table__cell_left">${category}</td>
@@ -88,7 +116,8 @@ const createRow = (item) => {
 };
 
 const renderGoods = (objects) => {
-  objects.forEach(item => tableBody.append(createRow(item)))
+  tableBody.innerHTML = '';
+  objects.forEach((item , index) => tableBody.append(createRow(item, index)))
 }
 
 btnAddGoods.addEventListener('click', () => {
@@ -100,6 +129,15 @@ overlay.addEventListener('click', ({target}) => {
     overlay.classList.remove('active');
   };
 });
+
+tableBody.addEventListener('click', ({target}) => {
+  if (target.closest('.table__btn_del')) {
+    const index = target.closest('tr').querySelector('.table__cell-id').textContent.slice(4)
+    goods = goods.filter(item => item['id'] != index);
+    renderGoods(goods);
+    console.log(goods);
+  }
+})
 
 overlay.classList.remove('active');
 
