@@ -4,6 +4,7 @@ const modalCheckbox = document.querySelector('.modal__checkbox');
 const modalInputDiscount = document.querySelector('.modal__input_discount');
 const overlay = document.querySelector('.overlay');
 const tableBody = document.querySelector('.table__body');
+const btnAddGoods = document.querySelector('.panel__add-goods');
 
 const goods = 
 [
@@ -90,7 +91,17 @@ const renderGoods = (objects) => {
   objects.forEach(item => tableBody.append(createRow(item)))
 }
 
-overlay.remove('active');
+btnAddGoods.addEventListener('click', () => {
+  overlay.classList.add('active');
+});
+
+overlay.addEventListener('click', ({target}) => {
+  if (!target.closest('.overlay__modal') || target.closest('.modal__close')) {
+    overlay.classList.remove('active');
+  };
+});
+
+overlay.classList.remove('active');
 
 renderGoods(goods);
 
