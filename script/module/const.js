@@ -2,6 +2,7 @@ const modalTitle = document.querySelector('.modal__title');
 const modalForm = document.querySelector('.modal__form');
 const modalCheckbox = document.querySelector('.modal__checkbox');
 const modalInputDiscount = document.querySelector('.modal__input_discount');
+const modalInputUnits = document.querySelector('.modal__input');
 const overlay = document.querySelector('.overlay');
 const tableBody = document.querySelector('.table__body');
 const btnAddGoods = document.querySelector('.panel__add-goods');
@@ -14,6 +15,7 @@ export default {
   modalForm,
   modalCheckbox,
   modalInputDiscount,
+  modalInputUnits,
   overlay,
   tableBody,
   btnAddGoods,

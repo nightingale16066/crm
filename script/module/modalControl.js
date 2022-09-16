@@ -7,6 +7,7 @@ const {
   overlay,
   tableBody,
   btnAddGoods,
+  modalCheckbox,
   id,
   totalPrice,
   cmsTotalPrice,
@@ -19,9 +20,10 @@ export const modalControl = (goods) => {
     }
   });
 
+
   modalForm.addEventListener('change', ({target}) => {
     // eslint-disable-next-line max-len
-    if (target === modalForm.count || target === modalForm.price || target === modalForm.discount_count || target === modalForm.discount) {
+    if (target === modalForm.count || target === modalForm.price || target === modalForm.discount || target === modalForm.discount_count) {
       if (modalForm.count.value && modalForm.price.value) {
         // eslint-disable-next-line max-len
         totalPrice.textContent = `$ ${modalForm.count.value * modalForm.price.value * (1 - (modalForm.discount_count?.value / 100))}`;
@@ -45,8 +47,8 @@ export const modalControl = (goods) => {
     overlay.classList.remove('active');
   });
 
-  modalForm.discount.addEventListener('change', () => {
-    if (modalForm.discount.checked) {
+  modalCheckbox.addEventListener('change', () => {
+    if (modalCheckbox.checked) {
       modalForm.discount_count.disabled = 0;
     } else {
       modalForm.discount_count.disabled = 1;
@@ -67,6 +69,10 @@ export const modalControl = (goods) => {
       renderGoods(goods);
       cmsTotalPrice.textContent = `$ ${findTotalSum(goods)}`;
       console.log(goods);
+    }
+    if (target.closest('.table__btn_pic')) {
+      const pictureUrl = target.dataset.pic;
+      open(pictureUrl, '', `width=800, height=600, top=${(screen.height - 600) / 2}, left=${(screen.width - 800) / 2}`);
     }
   });
 };

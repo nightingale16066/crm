@@ -16,7 +16,7 @@ export const createRow = (item, index) => {
     <td class="table__cell">${price} ₽</td>
     <td class="table__cell">${price * count * (discount_count ? (1 - discount_count / 100) : 1)} ₽</td>
     <td class="table__cell table__cell_btn-wrapper">
-      <button class="table__btn table__btn_pic"></button>
+      <button class="table__btn table__btn_pic" data-pic='./img/picture.jpg'></button>
       <button class="table__btn table__btn_edit"></button>
       <button class="table__btn table__btn_del"></button>
     </td>
