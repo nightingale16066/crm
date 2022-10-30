@@ -11,6 +11,7 @@ const {
   id,
   totalPrice,
   cmsTotalPrice,
+  pictureLabel,
 } = consts;
 
 export const modalControl = (goods) => {
@@ -19,7 +20,6 @@ export const modalControl = (goods) => {
       overlay.classList.remove('active');
     }
   });
-
 
   modalForm.addEventListener('change', ({target}) => {
     // eslint-disable-next-line max-len
@@ -30,6 +30,17 @@ export const modalControl = (goods) => {
       }
     }
   });
+
+  const fieldSet = document.querySelector('.modal__fieldset');
+  const wrapper = document.createElement('div');
+  const preview = document.createElement('img');
+  wrapper.style.cssText = `
+    color: red;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+  `;
+  fieldSet.append(wrapper, preview);
 
   modalForm.addEventListener('submit', e => {
     e.preventDefault();
@@ -44,6 +55,8 @@ export const modalControl = (goods) => {
     cmsTotalPrice.textContent = `$ ${findTotalSum(goods)}`;
     totalPrice.textContent = '$ 0.00';
     modalForm.reset();
+    preview.src = '';
+    wrapper.textContent = '';
     overlay.classList.remove('active');
   });
 
@@ -72,7 +85,24 @@ export const modalControl = (goods) => {
     }
     if (target.closest('.table__btn_pic')) {
       const pictureUrl = target.dataset.pic;
+      // eslint-disable-next-line max-len
       open(pictureUrl, '', `width=800, height=600, top=${(screen.height - 600) / 2}, left=${(screen.width - 800) / 2}`);
     }
+  });
+
+  pictureLabel.addEventListener('change', () => {
+    if (pictureLabel.files.length <= 0) return;
+    console.log(pictureLabel.files[0].size);
+    if (pictureLabel.files[0].size > 1000000) {
+      wrapper.textContent = 'Изображение не должно превышать размер 1 Мб';
+      preview.src = '';
+      return;
+    }
+
+    console.log(pictureLabel.files[0].size, 'after if');
+    wrapper.textContent = '';
+
+    const src = URL.createObjectURL(pictureLabel.files[0]);
+    preview.src = src;
   });
 };

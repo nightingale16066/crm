@@ -9,6 +9,7 @@ const btnAddGoods = document.querySelector('.panel__add-goods');
 const id = document.querySelector('.vendor-code__id');
 const totalPrice = document.querySelector('.modal__total-price');
 const cmsTotalPrice = document.querySelector('.cms__total-price');
+const pictureLabel = document.querySelector('.modal__file');
 
 export default {
   modalTitle,
@@ -22,4 +23,5 @@ export default {
   id,
   totalPrice,
   cmsTotalPrice,
+  pictureLabel,
 };
