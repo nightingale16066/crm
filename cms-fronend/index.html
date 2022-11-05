@@ -67,8 +67,17 @@
     </div>
   </section>
 
+  <div class="confirm__delete">
+    <div class="delete__content">
+      <div class="delete__message">Вы уверены что хотите удалить данный товар?</div>
+      <div class="button__group">
+        <button class="delete__btn btn-yes">Да</button>
+        <button class="delete__btn btn-no">Нет</button>
+      </div>
+    </div>
+  </div>
 
-  <div class="overlay active">
+  <div class="overlay overlay__add active">
     <div class="overlay__modal modal">
       <button class="modal__close">
         <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,8 +91,8 @@
         </div>
       </div>
 
-      <form action="https://jsonplaceholder.typicode.com/posts" class="modal__form" method="post">
-        <fieldset class="modal__fieldset">
+      <form class="modal__form modal__form-modal">
+        <fieldset class="modal__fieldset modal__fieldset-modal">
 
           <label class="modal__label modal__label_name" for="name">
             <span class="modal__text">Наименование</span>
@@ -93,8 +102,12 @@
 
           <label class="modal__label modal__label_category" for="category">
             <span class="modal__text">Категория</span>
-            <input class="modal__input" type="text" name="category" id="category" required>
+            <input class="modal__input" type="text" name="category" id="category" list="category-list-modal" required>
           </label>
+
+          <datalist id="category-list-modal">
+
+          </datalist>
 
           <label class="modal__label modal__label_description" for="description">
             <span class="modal__text">Описание</span>
@@ -109,8 +122,8 @@
           <div class="modal__label modal__label_discount">
             <label class="modal__text" for="discount">Дисконт</label>
             <div class="modal__checkbox-wrapper">
-              <input class="modal__checkbox" type="checkbox" name="discount" id="discount">
-              <input class="modal__input modal__input_discount" type="number" name="discount_count" disabled required>
+              <input class="modal__checkbox" type="checkbox" name="discount_count" id="discount_count">
+              <input class="modal__input modal__input_discount" type="number" name="discount" disabled>
             </div>
           </div>
 
@@ -126,7 +139,10 @@
           </label>
 
           <label tabindex="0" for="image" class="modal__label modal__label_file">Добавить изображение</label>
-          <input class="modal__file visually-hidden" tabindex="-1" type="file" name="image" id="image">
+          <input class="modal__file modal__file-modal visually-hidden" tabindex="-1" type="file" name="image" id="image">
+        
+          <div class="image-container image-container-modal">
+          </div>
         </fieldset>
 
         <div class="modal__footer">
@@ -140,6 +156,83 @@
     </div>
   </div>
 
+  <div class="overlay overlay__change">
+    <div class="overlay__modal modal modal-change">
+      <button class="modal__close">
+        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="m2 2 20 20M2 22 22 2" stroke="currentColor" stroke-width="3" stroke-linecap="round" /></svg>
+      </button>
+
+      <div class="modal_top">
+        <h2 class="modal__title">Изменить товар</h2>
+        <div class="modal__vendor-code vendor-code">
+          <p class="vendor-code__wrapper">id: <span class="change__vendor-code__id"></span></p>
+        </div>
+      </div>
+
+      <form class="modal__form modal__form-change">
+        <fieldset class="modal__fieldset modal__fieldset-change">
+
+          <label class="modal__label modal__label_name" for="name">
+            <span class="modal__text">Наименование</span>
+            <input class="modal__input" type="text" name="name" id="name" required>
+          </label>
+
+          <label class="modal__label modal__label_category" for="category">
+            <span class="modal__text">Категория</span>
+            <input class="modal__input" type="text" name="category" id="category" list="category-list" required>
+          </label>
+
+          <datalist id="category-list">
+
+          </datalist>
+
+          <label class="modal__label modal__label_description" for="description">
+            <span class="modal__text">Описание</span>
+            <textarea class="modal__input modal__input_textarea" name="description" id="description" required></textarea>
+          </label>
+
+          <label class="modal__label modal__label_units" for="units">
+            <span class="modal__text">Единицы измерения</span>
+            <input class="modal__input" type="text" name="units" id="units" pattern="[A-Za-zА-яа-я]+" title="Единицы измерения в текстовом виде" required>
+          </label>
+
+          <div class="modal__label modal__label_discount">
+            <label class="modal__text" for="discount">Дисконт</label>
+            <div class="modal__checkbox-wrapper">
+              <input class="modal__checkbox modal__checkbox-change" type="checkbox" name="discount_count" id="discount_count">
+              <input class="modal__input modal__input_discount" type="number" name="discount" disabled>
+            </div>
+          </div>
+
+
+          <label class="modal__label modal__label_count" for="count">
+            <span class="modal__text">Количество</span>
+            <input class="modal__input" type="number" name="count" id="count" required>
+          </label>
+
+          <label class="modal__label modal__label_price" for="price">
+            <span class="modal__text">Цена</span>
+            <input class="modal__input" type="number" name="price" id="price" required>
+          </label>
+
+          <label tabindex="0" for="changeImage" class="modal__label modal__label_file">Добавить изображение</label>
+          <input class="modal__file modal__file-change " tabindex="-1" type="file" name="changeImage" id="changeImage">
+
+          <div class="image-container-change image-container">
+          </div>
+        </fieldset>
+
+        <div class="modal__footer">
+          <label class="modal__total">Итоговая стоимость:
+            <output class="modal__total-price modal__total-price-change" name="total">$ 0.00</output>
+          </label>
+
+          <button class="modal__submit" type="submit">Добавить товар</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
 </body>
 

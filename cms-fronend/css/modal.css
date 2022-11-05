@@ -153,6 +153,13 @@
   margin: 0 auto;
 }
 
+.image-container:hover  {
+  background-color:rgba(0, 0, 0, 0.7);
+}
+.image-container:hover img {
+  opacity: 0.3;
+}
+
 .image-container:hover:after {
   content: '';
   position: absolute;
@@ -162,7 +169,7 @@
   transform: rotate(45deg);
   width: 35px;
   height: 1px;
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 .image-container:hover:before {
@@ -173,7 +180,7 @@
   transform: rotate(135deg);
   width: 35px;
   height: 1px;
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 .modal__label_file:hover {
