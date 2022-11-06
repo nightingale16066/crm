@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 // импорт стандартных библиотек Node.js
-const {existsSync, mkdirSync, readFileSync, writeFileSync, writeFile} = require('fs');
+const {existsSync, mkdirSync, readFileSync, writeFileSync, writeFile, readdir, unlinkSync} = require('fs');
 const {createServer} = require('http');
 
 // файл для базы данных
@@ -56,10 +56,17 @@ function dataURLtoFile(base64, id) {
   const format = base64.split(';')[0].split('/')[1];
   const ext = format === 'svg+xml' ? 'svg' : format === 'jpeg' ? 'jpg' : format;
   const base64Image = base64.split(';base64,').pop();
-  writeFile(`./image/${id}.${ext}`, base64Image, {encoding: 'base64'}, (err) => {
+  const timeId = Math.floor(Math.random()*100);
+  readdir('./image/', (err, files) => {
+    const fileToChange = files.find(file => file.match(new RegExp(`${id}`)));
+    if (fileToChange) {
+      unlinkSync(`./image/${fileToChange}`);
+    }
+  })
+  writeFile(`./image/${id}${timeId}.${ext}`, base64Image, {encoding: 'base64'}, (err) => {
     if (err) console.log(err);
   });
-  return `image/${id}.${ext}`
+  return `image/${id}${timeId}.${ext}`
 }
 
 /**

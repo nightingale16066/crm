@@ -79,7 +79,7 @@ const setFields = async item => {
     // const img = document.createElement('img');
     // img.src = `http://localhost:3000/${image}`;
     const img = await loadImage(`http://localhost:3000/${image}`);
-    console.log('img was set with: ', img);
+    // console.log('img was set with: ', img);
     container.style.display = 'flex';
     container.append(img);
   }
@@ -173,8 +173,10 @@ modalFormChange.addEventListener('change', ({target}) => {
 modalCheckboxChange.addEventListener('change', () => {
   if (modalCheckboxChange.checked) {
     modalFormChange.discount.disabled = 0;
+    modalFormChange.discount.required = true;
   } else {
     modalFormChange.discount.disabled = 1;
+    modalFormChange.discount.required = false;
     modalFormChange.discount.value = '';
   }
 });
@@ -182,14 +184,12 @@ modalCheckboxChange.addEventListener('change', () => {
 //  picture preview
 modalFileChange.addEventListener('change', () => {
   if (modalFileChange.files.length <= 0) return;
-  console.log('modalFileChange.files[0].size', modalFileChange.files[0].size);
   if (modalFileChange.files[0].size > 1000000) {
     changeWrapper.textContent = 'Изображение не должно превышать размер 1 Мб';
     container.style.display = 'none';
     return;
   }
 
-  console.log(modalFileChange.files[0], 'after if in edit');
   changeWrapper.textContent = '';
   container.innerHTML = '';
   const src = URL.createObjectURL(modalFileChange.files[0]);

@@ -103,8 +103,10 @@ export const modalControl = (goods) => {
   modalCheckbox.addEventListener('change', () => {
     if (modalCheckbox.checked) {
       modalForm.discount.disabled = 0;
+      modalForm.discount.required = true;
     } else {
       modalForm.discount.disabled = 1;
+      modalForm.discount.required = false;
       modalForm.discount.value = '';
     }
   });
